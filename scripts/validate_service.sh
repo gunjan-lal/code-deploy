@@ -1,7 +1,7 @@
 #!/bin/bash
 for i in `seq 1 10`;
 do
-  HTTP_CODE=`curl --write-out '%{http_code}' -m 10 -q -s http://localhost:80`
+  HTTP_CODE=`curl -s -o /dev/null -w "%{http_code}" http://localhost:80`
   if [ "$HTTP_CODE" == "200" ]; then
     echo "Successfully pulled root page."
     exit 0;
