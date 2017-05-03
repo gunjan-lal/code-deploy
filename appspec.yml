@@ -2,20 +2,20 @@ version: 0.0
 os: linux
 files:
   - source: /simple-website
-    destination: /var/www/html/
+    destination: /opt/simple-website
   - source: default
-    destination: /etc/nginx/sites-enabled/
+    destination: /opt/default_nginx_conf/
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies.sh
   AfterInstall:
     - location: scripts/resource_test.sh
-      timeout: 180
-  #ApplicationStart:
-  #  - location: scripts/
-  #    timeout: 3600
-  #ValidateService:
-#    - location: Scripts/MonitorService.sh
-#      timeout: 3600
-#      runas: codedeployuser
-#
+      timeout: 60
+  ApplicationStart:
+    - location: scripts/write_config.sh
+      timeout: 60
+    - location: scripts/start_app.sh
+      timeout: 60
+  ValidateService:
+    - location: scripts/validate_service.sh
+
