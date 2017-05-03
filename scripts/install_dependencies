@@ -1,0 +1,18 @@
+apt-get update
+apt-get install nginx -y
+apt-get install php7.0-fpm php-mysql
+echo "extension=php_pdo_mysql.so" >> /etc/php/7.0/fpm/php.ini
+service php7.0-fpm restart
+
+#apt-get install git -yy
+#cd /var/www/html
+#git clone https://github.com/gunjan-lal/simple-website.git
+
+cp /var/www/html/simple-website/default /etc/nginx/sites-enabled/
+
+#update constants.php
+sed "s/'localhost'/'34.202.112.233:3306'/g" /var/www/html/simple-website/libs/constants.php
+sed 's/root/test/g' /var/www/html/simple-website/libs/constants.php
+
+service nginx reload
+
