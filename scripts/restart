@@ -1,2 +1,0 @@
-systemctl restart php7.0-fpm
-service nginx restart
